@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-   "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "supertest": "^7.0.0"
   }
 }

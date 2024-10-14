@@ -2,7 +2,7 @@ import conection_db from "./database/conectionDb.js";
 import bookModel from "./models/bookModel.js";
 import express from "express"
 import bookRouter from "./routers/routes.js";
-import cors from "cors";
+import cors from "cors"
 
 export const app = express()
 
@@ -13,7 +13,7 @@ app.use (express.json())
 //   res.send('Hola primera api')
 // })
 
-app.use('/', bookRouter)
+app.use('/books', bookRouter)
 
 try {
     await conection_db.authenticate();
