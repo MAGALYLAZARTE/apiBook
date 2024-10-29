@@ -43,6 +43,25 @@ describe ('crud books', () => {
             expect(response.statusCode).toBe(200)
             expect(response.body.message).toBe('Libro eliminado correctamente')
         });
+        
+        test ('should update a book', async () => {
+            
+            const updateBook = await bookModel.create({
+                bookTitle: "El señor de los anillos",
+                authorName: "J.R.R. Tolkien",
+                bookDescription: "Un libro de fantasía"
+            });
+            const response = await request(app).put(`/books/${updateBook.id}`).send({
+                bookTitle: "update El señor de los anillos",
+                authorName: "update J.R.R. Tolkien",
+                bookDescription: "update Un libro de fantasía"
+            });
+            expect(response.statusCode).toBe(200)
+            expect(response.body.message).toBe('Libro actualizado correctamente')
+            // expect(response.body.bookTitle).toBe("El señor de los anillos")
+            // expect(response.body.authorName).toBe("J.R.R. Tolkien")
+            // expect(response.body.bookDescription).toBe("Un libro de fantasía")
+            });
 
         afterAll (() => {
             server.close()
