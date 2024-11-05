@@ -4,7 +4,7 @@ import { DataTypes } from "sequelize";
 const bookModel = conection_db.define(
     'Book',
     {
-      // Model attributes are defined here
+      // Los atributos del modelo se definen aquí
       bookTitle: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -12,12 +12,12 @@ const bookModel = conection_db.define(
       authorName: {
         type: DataTypes.STRING,
         allowNull: false,
-        // allowNull defaults to true
+        // allowNull cuando el valor es verdadero
       },
       bookDescription: {
         type: DataTypes.STRING,
         allowNull: false,
-        // allowNull defaults to true
+        // allowNull cuando el valor es verdadero
       },
     },
     {
