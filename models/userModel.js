@@ -16,10 +16,16 @@ const userModel = conection_db.define(
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true, // Para evitar emails duplicados
       },
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "user", // Valor por defecto, puedes cambiarlo según tu preferencia
       },
     },
     {
@@ -28,4 +34,4 @@ const userModel = conection_db.define(
     }
   );
 
-  export default userModel;
+export default userModel;
