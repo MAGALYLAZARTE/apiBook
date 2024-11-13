@@ -25,6 +25,7 @@ export const registerController = async (req, res) => {
       email,
       password: hashedPassword,
       role: role || "user", // rol predeterminado "user"
+      
     };
 
     await userModel.create(newUser);
