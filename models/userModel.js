@@ -23,9 +23,8 @@ const userModel = conection_db.define(
         allowNull: false,
       },
       role: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "user", // Valor por defecto, puedes cambiarlo según tu preferencia
+        type: DataTypes.ENUM("user", "admin"),
+        defaultValue: "user", // Rol predeterminado
       },
     },
     {

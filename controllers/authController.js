@@ -8,23 +8,23 @@ dotenv.config();
 
 export const registerController = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
+    // Verificar si el usuario ya existe
     const existingUserByEmail = await userModel.findOne({ where: { email } });
     if (existingUserByEmail) {
       return res.status(409).json({ message: "El email ya está registrado" });
     }
 
-    const existingUserByName = await userModel.findOne({ where: { name } });
-    if (existingUserByName) {
-      return res.status(409).json({ message: "El nombre ya está en uso" });
-    }
+    // Encriptar la contraseña
     const hashedPassword = await encryptPassword(password);
 
+    // Crear usuario con rol
     const newUser = {
       name,
       email,
       password: hashedPassword,
+      role: role || "user", // rol predeterminado "user"
     };
 
     await userModel.create(newUser);
@@ -38,27 +38,24 @@ export const registerController = async (req, res) => {
 
 export const loginController = async (req, res) => {
   try {
-    const userEmail = req.body.email;
-    const loginPassword = req.body.password;
+    const { email, password } = req.body;
 
-
-    const user = await userModel.findOne({ where: { email: userEmail } });
+    const user = await userModel.findOne({ where: { email } });
     if (!user) {
       handleHttpError(res, "USER_NOT_EXISTS", 404);
       return;
     }
 
-    const password = user.password;
-    const checkPassword = await comparePassword(loginPassword, password);
-
+    const checkPassword = await comparePassword(password, user.password);
     if (!checkPassword) {
       handleHttpError(res, "PASSWORD_INVALID", 401);
       return;
     }
 
+    // Incluir el rol en el token
     const sessionData = {
-      token : await tokenSing(user),
-      user: user,
+      token: await tokenSing({ id: user.id, role: user.role }), // El token ahora contiene el rol
+      user,
     };
 
     res.send({ sessionData });
@@ -67,4 +64,3 @@ export const loginController = async (req, res) => {
     handleHttpError(res, "ERROR_LOGIN_USER");
   }
 };
-
