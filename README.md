@@ -27,10 +27,6 @@ Este es un proyecto de API RESTful para gestionar libros y usuarios, donde los u
 1. Node.js (versión recomendada: 16.x o superior).
 2. MySQL o MariaDB.
 
-### Pasos para la instalación
 
-1. **Clonar el repositorio:**
 
-   ```bash
-   git clone <url-del-repositorio>
 
